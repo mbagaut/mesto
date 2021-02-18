@@ -1,0 +1,16 @@
+.header__title {
+  width: 142px;
+  height: 33px;
+  margin: 0;
+
+  background-image: url(../../../images/logo_team_light.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 320px) {
+  .header__title {
+    width: 103.74px;
+    height: 24.4px;
+  }
+}

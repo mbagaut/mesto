@@ -1,0 +1,18 @@
+.person__photo {
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin-right: 29px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
+
+@media (max-width: 895px) {
+  .person__photo {
+    margin-right: 0;
+    margin-bottom: 27px;
+  }
+}

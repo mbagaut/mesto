@@ -1,0 +1,61 @@
+@import url('../vendor/normalize.css');
+@import url("../vendor/fonts/fonts.css");
+
+
+/*----------------------- Блок btn-opacity ------------------------------ */
+
+@import url('../blocks/btn-opacity/btn-opacity.css');
+@import url('../blocks/btn-opacity/_high/btn-opacity_high.css');
+
+/*----------------------- Блок Page ------------------------------ */
+
+@import url('../blocks/page/page.css');
+@import url('../blocks/page/__header/page__header.css');
+@import url('../blocks/page/__main/page__main.css');
+
+/*----------------------- Блок Header ------------------------------ */
+
+@import url('../blocks/header/header.css');
+@import url('../blocks/header/__title/header__title.css');
+
+/*----------------------- Блок Person ------------------------------ */
+
+@import url('../blocks/person/person.css');
+@import url('../blocks/person/__header/person__header.css');
+@import url('../blocks/person/__photo/person__photo.css');
+@import url('../blocks/person/__input/person__input.css');
+@import url('../blocks/person/__name/person__name.css');
+@import url('../blocks/person/__title/person__title.css');
+@import url('../blocks/person/__job/person__job.css');
+@import url('../blocks/person/__icon-edit/person__icon-edit.css');
+
+/*----------------------- Блок Add-button ------------------------------ */
+
+@import url('../blocks/add-button/add-button.css');
+
+/*----------------------- Блок Photos ------------------------------ */
+
+@import url('../blocks/photos/photos.css');
+@import url('../blocks/photos/__item/photos__item.css');
+@import url('../blocks/photos/__image/photos__image.css');
+@import url('../blocks/photos/__title/photos__title.css');
+@import url('../blocks/photos/__icon/photos__icon.css');
+@import url('../blocks/photos/__icon/__icon_color/photos__icon_color_white.css');
+@import url('../blocks/photos/__icon/__icon_color/photos__icon_color_black.css');
+
+/*----------------------- Блок Footer ------------------------------ */
+
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__author/footer__author.css');
+
+/*----------------------- Блок Popup ------------------------------ */
+
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/_opened/popup_opened.css');
+@import url('../blocks/popup/__overlay/popup__overlay.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__content/popup__content.css');
+@import url('../blocks/popup/__close/popup__close.css');
+@import url('../blocks/popup/__title/popup__title.css');
+@import url('../blocks/popup/__input/popup__input.css');
+@import url('../blocks/popup/__btn/popup__btn.css');

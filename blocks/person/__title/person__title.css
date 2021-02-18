@@ -1,0 +1,22 @@
+.person__title {
+  max-width: 300px;
+  margin: 0;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 1.14;
+  font-size: calc(27px + 15 * ((100vw - 320px) / 575));
+}
+
+@media (min-width: 895px) {
+  .person__title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 895px) {
+  .person__title {
+    margin-bottom: 8px;
+    margin-left: 16px;
+  }
+}
