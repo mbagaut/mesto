@@ -38,10 +38,11 @@
 @import url('../blocks/photos/photos.css');
 @import url('../blocks/photos/__item/photos__item.css');
 @import url('../blocks/photos/__image/photos__image.css');
+@import url('../blocks/photos/__string/photos__string.css');
 @import url('../blocks/photos/__title/photos__title.css');
 @import url('../blocks/photos/__icon/photos__icon.css');
-@import url('../blocks/photos/__icon/__icon_color/photos__icon_color_white.css');
-@import url('../blocks/photos/__icon/__icon_color/photos__icon_color_black.css');
+@import url('../blocks/photos/__icon/_color/photos__icon_color_white.css');
+@import url('../blocks/photos/__icon/_color/photos__icon_color_black.css');
 
 /*----------------------- Блок Footer ------------------------------ */
 

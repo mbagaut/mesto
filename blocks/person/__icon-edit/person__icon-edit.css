@@ -8,11 +8,12 @@
   border: 1px solid white;
   min-width: calc(18px + 6 * ((100vw - 320px) / 960));
   min-height: calc(18px + 6 * ((100vw - 320px) / 960));
+  cursor: pointer;
 }
 
 @media (min-width: 1280px) {
   .person__icon-edit {
-    width: 24px;
-    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
   }
 }

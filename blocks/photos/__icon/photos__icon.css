@@ -1,12 +1,10 @@
 .photos__icon {
-  position: absolute;
-  right: 20px;
-  bottom: 30px;
   width: 22px;
   height: 19px;
   -webkit-transition: all 0.2s ease 0.1s;
   -o-transition: all 0.2s ease 0.1s;
   transition: all 0.2s ease 0.1s;
+  cursor: pointer;
 }
 
 .photos__icon:hover {

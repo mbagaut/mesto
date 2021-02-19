@@ -18,15 +18,19 @@
   closePopupBut.addEventListener('click', popupToggle);
   closePopupOverlay.addEventListener('click', popupToggle);
 
-  function popupToggle() {
-    // Проверяем, имеет ли кнопка класс popup_opened
-    let popupOn = popup.classList.contains('popup_opened');
+  // function popupToggle() {
+  // 	// Проверяем, имеет ли кнопка класс popup_opened
+  // 	let popupOn = popup.classList.contains('popup_opened');
 
-    if (popupOn === false) {
-      popup.classList.add('popup_opened');
-    } else {
-      popup.classList.remove('popup_opened');
-    }
+  // 	if (popupOn === false) {
+  // 		popup.classList.add('popup_opened');
+  // 	} else {
+  // 		popup.classList.remove('popup_opened');
+  // 	}
+  // }
+
+  function popupToggle() {
+    popup.classList.toggle('popup_opened');
   }
 
   //! POPUP EDIT
