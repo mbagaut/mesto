@@ -1,5 +1,9 @@
 .photos {
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -9,6 +13,5 @@
   -webkit-column-gap: 17px;
      -moz-column-gap: 17px;
           column-gap: 17px;
-  grid-template-columns: repeat(auto-fit, 282px);
   row-gap: 20px;
 }
