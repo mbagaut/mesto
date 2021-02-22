@@ -1,10 +1,7 @@
 .popup_opened {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup_opened .popup__content {
-  -webkit-transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
-          transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
-  opacity: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* visibility: visible;
+  opacity: 1; */
 }

@@ -5,7 +5,10 @@
 /*----------------------- Блок btn-opacity ------------------------------ */
 
 @import url('../blocks/btn-opacity/btn-opacity.css');
-@import url('../blocks/btn-opacity/_high/btn-opacity_high.css');
+@import url('../blocks/btn-opacity/_type/btn-opacity_type_low.css');
+@import url('../blocks/btn-opacity/_type/btn-opacity_type_medium.css');
+@import url('../blocks/btn-opacity/_type/btn-opacity_type_high.css');
+
 
 /*----------------------- Блок Page ------------------------------ */
 
@@ -16,22 +19,19 @@
 /*----------------------- Блок Header ------------------------------ */
 
 @import url('../blocks/header/header.css');
-@import url('../blocks/header/__title/header__title.css');
+@import url('../blocks/header/__logo/header__logo.css');
 
 /*----------------------- Блок Person ------------------------------ */
 
 @import url('../blocks/person/person.css');
 @import url('../blocks/person/__header/person__header.css');
 @import url('../blocks/person/__photo/person__photo.css');
-@import url('../blocks/person/__input/person__input.css');
-@import url('../blocks/person/__name/person__name.css');
+@import url('../blocks/person/__container/person__container.css');
+@import url('../blocks/person/__string/person__string.css');
 @import url('../blocks/person/__title/person__title.css');
 @import url('../blocks/person/__job/person__job.css');
 @import url('../blocks/person/__icon-edit/person__icon-edit.css');
-
-/*----------------------- Блок Add-button ------------------------------ */
-
-@import url('../blocks/add-button/add-button.css');
+@import url('../blocks/person/__button/person__button.css');
 
 /*----------------------- Блок Photos ------------------------------ */
 
@@ -41,8 +41,7 @@
 @import url('../blocks/photos/__string/photos__string.css');
 @import url('../blocks/photos/__title/photos__title.css');
 @import url('../blocks/photos/__icon/photos__icon.css');
-@import url('../blocks/photos/__icon/_color/photos__icon_color_white.css');
-@import url('../blocks/photos/__icon/_color/photos__icon_color_black.css');
+@import url('../blocks/photos/__icon/_active/photos__icon_active.css');
 
 /*----------------------- Блок Footer ------------------------------ */
 
@@ -54,8 +53,8 @@
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
 @import url('../blocks/popup/__overlay/popup__overlay.css');
-@import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/__content/popup__content.css');
+@import url('../blocks/popup/__content/_opened/popup__content_opened.css');
 @import url('../blocks/popup/__close/popup__close.css');
 @import url('../blocks/popup/__title/popup__title.css');
 @import url('../blocks/popup/__input/popup__input.css');

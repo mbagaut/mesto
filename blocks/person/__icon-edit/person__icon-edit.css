@@ -1,7 +1,9 @@
 .person__icon-edit {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background-image: url(../../../images/button_pen.png);
+  padding: 0;
+  background-color: black;
+  background-image: url(../../../images/button_pen.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 55%;

@@ -1,11 +1,11 @@
-.person__input {
+.person__container {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
 
 @media (max-width: 895px) {
-  .person__input {
+  .person__container {
     -webkit-box-flex: 0;
         -ms-flex-positive: 0;
             flex-grow: 0;

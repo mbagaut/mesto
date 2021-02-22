@@ -1,17 +1,15 @@
 .header {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  min-height: 119px;
   padding-top: 45px;
+  padding-bottom: 41px;
 
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media (max-width: 320px) {
   .header {
-    min-height: 84px;
-
-    padding-top: 28px;
-    padding-left: 8px;
+		padding-bottom: 31.6px;
+		padding-top: 28px;
   }
 }

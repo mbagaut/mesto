@@ -4,7 +4,3 @@
   -o-transition: all 0.3s ease 0.1s;
   transition: all 0.3s ease 0.1s;
 }
-
-.btn-opacity:hover {
-  opacity: 0.6;
-}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base target="_self">
-    <title>mesto</title>
+    <title>Место</title>
     <link rel="stylesheet" href="pages/index.css" />
     <meta name="description" content="Страница об интересных местах в России">
     <meta name="keywords" content="Путешествия, Россия, П. И. Бекетов, Олёкминск, Якутск, Нерчинск, Чита, Енисейск">
@@ -12,79 +12,80 @@
   </head>
   <body class="page">
     <header class="header page__header">
-      <h1 class="header__title"></h1>
+      <div class="header__logo"></div>
     </header>
 
     <main class="main page__main">
       <section class="person main__person">
         <div class="person__header">
           <img class="person__photo" src="images/beketov.jpg" alt="П. И. Бекетов">
-          <div class="person__input">
-            <div class="person__name">
-              <h2 class="person__title">П. И. Бекетов</h2>
-              <div id="popup-open" class="person__icon-edit btn-opacity"></div>
+          <div class="person__container">
+            <div class="person__string">
+              <h1 class="person__title">П. И. Бекетов</h1>
+              <button id="popup-open" class="person__icon-edit btn-opacity btn-opacity_type_medium" type="button"></button>
             </div>
             <p class="person__job">Русский землепроходец</p>
           </div>
-          <button class="add-button btn-opacity"></button>
+          <button class="person__button btn-opacity btn-opacity_type_medium" type="button"></button>
         </div>
 
-        <ul class="person__grid photos">
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/olekminsk.jpg" alt="Олёкминск">
-              <div class="photos__string">
-                <h3 class="photos__title">Олёкминск</h3>
-                <div class="photos__icon photos__icon_color_white"></div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/yakutsk.jpg" alt="Якутск">
-              <div class="photos__string">
-                <h3 class="photos__title">Якутск</h3>
-                <div class="photos__icon photos__icon_color_white"></div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/nerchinsk.jpg" alt="Нерчинск">
-              <div class="photos__string">
-                <h3 class="photos__title">Нерчинск</h3>
-                <div class="photos__icon photos__icon_color_white"></div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/chita.jpg" alt="Чита">
-              <div class="photos__string">
-                <h3 class="photos__title">Чита</h3>
-                <div class="photos__icon photos__icon_color_white"></div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/eniseisk.jpg" alt="Енисейск">
-              <div class="photos__string">
-                <h3 class="photos__title">Енисейск</h3>
-                <div class="photos__icon photos__icon_color_white"></div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/beketov2.jpg" alt="Якутск">
-              <div class="photos__string">
-                <h3 class="photos__title">Якутск</h3>
-                <div class="photos__icon photos__icon_color_white"></div>
-              </div>
-            </article>
-          </li>
-        </ul>
+        <section class="main__grid">
+          <ul class="photos">
+            <li>
+              <article class="photos__item">
+                <img class="photos__image" src="images/olekminsk.jpg" alt="Олёкминск">
+                <div class="photos__string">
+                  <h2 class="photos__title">Олёкминск</h2>
+                  <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="photos__item">
+                <img class="photos__image" src="images/yakutsk.jpg" alt="Якутск">
+                <div class="photos__string">
+                  <h2 class="photos__title">Якутск</h2>
+                  <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="photos__item">
+                <img class="photos__image" src="images/nerchinsk.jpg" alt="Нерчинск">
+                <div class="photos__string">
+                  <h2 class="photos__title">Нерчинск</h2>
+                  <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="photos__item">
+                <img class="photos__image" src="images/chita.jpg" alt="Чита">
+                <div class="photos__string">
+                  <h2 class="photos__title">Чита</h2>
+                  <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="photos__item">
+                <img class="photos__image" src="images/eniseisk.jpg" alt="Енисейск">
+                <div class="photos__string">
+                  <h2 class="photos__title">Енисейск</h2>
+                  <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="photos__item">
+                <img class="photos__image" src="images/beketov2.jpg" alt="Якутск">
+                <div class="photos__string">
+                  <h2 class="photos__title">Якутск</h2>
+                  <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+                </div>
+              </article>
+            </li>
+          </ul>
       </section>
     </main>
 
@@ -94,20 +95,18 @@
 
     <section id="popup" class="popup">
       <div class="popup__overlay"></div>
-      <div class="popup__container">
 
-        <div class="popup__content">
-          <div class="popup__close btn-opacity"></div>
-          <h2 class="popup__title">Редактировать профиль</h2>
+      <div class="popup__content">
+        <button class="popup__close btn-opacity btn-opacity_type_medium" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
 
-          <form action="#" method="POST">
-            <input class="popup__input" tabindex="-1" id="name" type="text" name="name" placeholder="Жак-Ив Кусто">
-            <input class="popup__input" tabindex="-1" id="job" type="text" name="job" placeholder="Исследователь океана">
-            <button class="popup__btn btn-opacity btn-opacity_high" tabindex="18" type="submit">Сохранить</button>
-          </form>
-        </div>
-
+        <form class="popup__form" name="popupForm" action="#" method="POST">
+          <input class="popup__input" tabindex="1" id="name" type="text" name="name" placeholder="Жак-Ив Кусто">
+          <input class="popup__input" tabindex="2" id="job" type="text" name="job" placeholder="Исследователь океана">
+          <button class="popup__btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+        </form>
       </div>
+
     </section>
   <script src="js/script.js"></script>
   </body>

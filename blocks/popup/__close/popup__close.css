@@ -1,43 +1,22 @@
 .popup__close {
   position: absolute;
-  top: -30px;
-  right: -20px;
-  width: 22px;
+  top: -45px;
+  right: -40px;
+  width: 47px;
+  height: 47px;
   cursor: pointer;
-}
-
-.popup__close::before,
-.popup__close::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 2px;
-  width: 40px;
-  height: 4px;
-  background-color: #fff;
-}
-
-.popup__close::before {
-  -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-.popup__close::after {
-  -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  border: 0;
+  background: 0;
+  background-image: url(../../../images/closeicon.svg);
+  outline: none;
 }
 
 @media (max-width: 390px) {
   .popup__close {
-    top: -44px;
-    right: 13px;
-  }
-
-  .popup__close::before,
-  .popup__close::after {
-    width: 30px;
-    height: 3px;
+    -webkit-transform: scale(56%);
+    -ms-transform: scale(56%);
+        transform: scale(56%);
+    top: -55px;
+    right: -5px;
   }
 }
