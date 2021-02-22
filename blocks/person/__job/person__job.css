@@ -1,7 +1,14 @@
 .person__job {
   margin: 0;
+  max-width: 300px;
   line-height: 1.22;
   font-size: calc(14px + 4 * ((100vw - 320px) / 575));
+
+
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media (min-width: 895px) {
@@ -12,6 +19,13 @@
 
 @media (max-width: 895px) {
   .person__job {
+    margin: 0 auto;
     text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .person__job {
+    max-width: 200px;
   }
 }
