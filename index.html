@@ -22,69 +22,16 @@
           <div class="person__container">
             <div class="person__string">
               <h1 class="person__title">П. И. Бекетов</h1>
-              <button id="popup-open" class="person__icon-edit btn-opacity btn-opacity_type_medium" type="button"></button>
+              <button id="popup-redact-but" class="person__icon-edit btn-opacity btn-opacity_type_medium" type="button"></button>
             </div>
             <p class="person__job">Русский землепроходец</p>
           </div>
-          <button class="person__button btn-opacity btn-opacity_type_medium" type="button"></button>
+          <button id="popup-add-but" class="person__button btn-opacity btn-opacity_type_medium" type="button"></button>
         </div>
       </section>
       <section class="main__grid">
-        <ul class="photos">
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/olekminsk.jpg" alt="Олёкминск">
-              <div class="photos__string">
-                <h2 class="photos__title">Олёкминск</h2>
-                <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/yakutsk.jpg" alt="Якутск">
-              <div class="photos__string">
-                <h2 class="photos__title">Якутск</h2>
-                <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/nerchinsk.jpg" alt="Нерчинск">
-              <div class="photos__string">
-                <h2 class="photos__title">Нерчинск</h2>
-                <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/chita.jpg" alt="Чита">
-              <div class="photos__string">
-                <h2 class="photos__title">Чита</h2>
-                <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/eniseisk.jpg" alt="Енисейск">
-              <div class="photos__string">
-                <h2 class="photos__title">Енисейск</h2>
-                <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="photos__item">
-              <img class="photos__image" src="images/beketov2.jpg" alt="Якутск">
-              <div class="photos__string">
-                <h2 class="photos__title">Якутск</h2>
-                <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
-              </div>
-            </article>
-          </li>
+        <ul id="photos" class="photos">
+
         </ul>
       </section>
     </main>
@@ -93,7 +40,7 @@
       <p class="footer__author">&copy; 2021. Марат Багаутдинов</p>
     </footer>
 
-    <section id="popup" class="popup">
+    <section id="popup-redact" class="popup">
       <div class="popup__overlay"></div>
 
       <div class="popup__content">
@@ -106,8 +53,46 @@
           <button class="popup__btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
         </form>
       </div>
+    </section>
+
+    <section id="popup-add" class="popup">
+      <div class="popup__overlay"></div>
+
+      <div class="popup__content">
+        <button class="popup__close btn-opacity btn-opacity_type_medium" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+
+        <form class="popup__form" name="popupForm" action="#" method="POST">
+          <input class="popup__input" tabindex="1" id="card-name" type="text" name="name" placeholder="Название">
+          <input class="popup__input" tabindex="2" id="link" type="text" name="job" placeholder="Ссылка на картинку">
+          <button class="popup__btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="popup-img" class="popup popup_img-only">
+      <div class="popup__overlay"></div>
+
+      <div class="popup__content popup__content_img-only">
+        <button class="popup__close btn-opacity btn-opacity_type_medium" type="button"></button>
+        <h2 class="popup__title popup__title_img-only">Новое место</h2>
+      </div>
 
     </section>
+
+    <template id="card-template">
+      <li class="card">
+        <article class="photos__item">
+          <img class="photos__image" src="" alt="">
+          <button class="photos__icon-del btn-opacity btn-opacity_type_low" type="button"></button>
+          <div class="photos__string">
+            <h2 class="photos__title"></h2>
+            <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+          </div>
+        </article>
+      </li>
+    </template>
+
   <script src="js/script.js"></script>
   </body>
 </html>
