@@ -112,9 +112,8 @@ function addImgFromCardToPopup(card) {
   });
 }
 
-// Отрисовка карточек
-function drawCard(card) {
-  addNewCard(card);
+// Навешивание слушателей на карточки
+function addEventListenersOnCards(card) {
   toggleLike(card);
   cardDel(card);
   addImgFromCardToPopup(card);
@@ -126,7 +125,7 @@ function createNewCard(title, image) {
   newCard.querySelector('.photos__image').src = image;
   newCard.querySelector('.photos__image').alt = title;
   newCard.querySelector('.photos__title').textContent = title;
-
+  addEventListenersOnCards(newCard);
   return newCard;
 }
 
@@ -146,25 +145,25 @@ function handleFormAddCard(evt) {
   // Эта строчка отменяет стандартную отправку формы.
   evt.preventDefault();
 
-  let cardTitle = nameCardInput.value;
-  let cardImage = linkInput.value;
-  let card = createNewCard(cardTitle, cardImage);
+  const cardTitle = nameCardInput.value;
+  const cardImage = linkInput.value;
+  const card = createNewCard(cardTitle, cardImage);
   togglePopup(popupAdd);
-  drawCard(card);
+  addNewCard(card);
 }
 
 // Добавление первых 6ти карточек на страницу при загрузке
 function addInitCards() {
   initialCards.forEach((item) => {
-    let card = createNewCard(item.name, item.link);
-    drawCard(card);
+    const card = createNewCard(item.name, item.link);
+    addNewCard(card);
   });
 }
 
 addInitCards();
 
 // Вешаем обработчик на кнопки закрытия и области вокруг каждого popup
-openPopupRedactBut.addEventListener('click', () => togglePopup(popupRedact));
+openPopupRedactBut.addEventListener('click', openProfilePopup);
 closePopupRedactBut.addEventListener('click', () => togglePopup(popupRedact));
 closePopupRedactOverlay.addEventListener('click', () => togglePopup(popupRedact));
 
