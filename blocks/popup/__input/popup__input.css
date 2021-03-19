@@ -10,6 +10,7 @@
   outline: none;
 }
 
-.popup__input:first-child {
-  margin-bottom: 30px;
+.popup__input:invalid {
+  box-shadow: none;
+  border-bottom: 1px solid #FF0000;
 }

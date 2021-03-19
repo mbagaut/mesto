@@ -48,9 +48,19 @@
         <h2 class="popup__title">Редактировать профиль</h2>
 
         <form class="popup__form" name="popupRedactForm" action="#" method="POST">
-          <input class="popup__input" tabindex="1" id="name" type="text" name="name" placeholder="Жак-Ив Кусто">
-          <input class="popup__input" tabindex="2" id="job" type="text" name="job" placeholder="Исследователь океана">
-          <button class="popup__btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+          <fieldset class="popup__fieldset">
+            <label class="popup__field">
+              <input class="popup__input" tabindex="1" id="name-input" type="text" name="name" placeholder="Жак-Ив Кусто" required minlength="2" maxlength="40">
+              <span class="name-input-error"></span>
+            </label>
+
+            <label class="popup__field">
+              <input class="popup__input" tabindex="2" id="job-input" type="text" name="job" placeholder="Исследователь океана" required minlength="2" maxlength="200">
+              <span class="job-input-error"></span>
+            </label>
+
+            <button class="popup__submit-btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+          </fieldset>
         </form>
       </div>
     </section>
@@ -63,9 +73,19 @@
         <h2 class="popup__title">Новое место</h2>
 
         <form class="popup__form" name="popupAddForm" action="#" method="POST">
-          <input class="popup__input" tabindex="1" id="card-name" type="text" name="cardName" placeholder="Название">
-          <input class="popup__input" tabindex="2" id="link" type="text" name="cardLink" placeholder="Ссылка на картинку">
-          <button class="popup__btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+          <fieldset class="popup__fieldset">
+            <label class="popup__field">
+              <input class="popup__input" tabindex="1" id="card-name-input" type="text" name="cardName" placeholder="Название" required minlength="2" maxlength="30">
+              <span class="card-name-input-error"></span>
+            </label>
+
+            <label class="popup__field">
+              <input class="popup__input" tabindex="2" id="link-input" type="url" name="cardLink" placeholder="Ссылка на картинку" required>
+              <span class="link-input-error"></span>
+            </label>
+
+            <button class="popup__submit-btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+          </fieldset>
         </form>
       </div>
     </section>
@@ -94,6 +114,7 @@
       </li>
     </template>
 
-  <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/validate.js"></script>
   </body>
 </html>
