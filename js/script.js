@@ -37,28 +37,46 @@ const popupElements = {
   popupAddForm: document.forms.popupAddForm,
 };
 
+const handlePopupClose = (evt) => {
+  const popups = [popupElements.popupAdd, popupElements.popupImg, popupElements.popupRedact];
+  const openedPopup = popups.find((popup) => popup.classList.contains('popup_opened'));
+  if (evt.key === 'Escape' || evt.target.classList.contains('popup__overlay') || evt.target.classList.contains('popup__close')) {
+    closePopup(openedPopup);
+  }
+}
+
 const openPopup = (popup) => {
+  if (popup === popupElements.popupAdd) {
+    popupElements.popupAddForm.cardName.value = '';
+    popupElements.popupAddForm.cardLink.value = '';
+
+    enableValidation(
+      {
+        fieldsetSelector: '.popup__fieldset',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__submit-btn',
+        inactiveButtonClass: 'popup__submit-btn_disabled',
+        inputErrorClass: 'popup__input_error',
+        errorClass: 'popup__input-error',
+      }
+    );
+  }
+
   popup.classList.add('popup_opened');
   popup.querySelector('.popup__content').classList.add('popup__content_opened');
 
-  document.addEventListener('keydown', function handleKeydown(evt) {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
-
-  popup.querySelector('.popup__overlay').addEventListener('click', function handleClick() {
-    closePopup(popup);
-  });
-
-  popup.querySelector('.popup__close').addEventListener('click', function handleClick() {
-    closePopup(popup);
-  });
+  document.addEventListener('keydown', handlePopupClose);
+  popup.querySelector('.popup__overlay').addEventListener('click', handlePopupClose);
+  popup.querySelector('.popup__close').addEventListener('click', handlePopupClose);
 };
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   popup.querySelector('.popup__content').classList.remove('popup__content_opened');
+
+  document.removeEventListener('keydown', handlePopupClose);
+  popup.querySelector('.popup__overlay').removeEventListener('click', handlePopupClose);
+  popup.querySelector('.popup__close').removeEventListener('click', handlePopupClose);
 };
 
 const openProfilePopup = () => {
@@ -129,6 +147,7 @@ const handleFormAddCard = (evt) => {
   const card = createNewCard(cardTitle, cardImage);
   closePopup(popupElements.popupAdd);
   addNewCard(card);
+
 };
 
 const addInitCards = () => {
@@ -140,7 +159,7 @@ const addInitCards = () => {
 
 addInitCards();
 
-// Функция нужна для корректной работы валидатора инпутов в форме при первой загрузке страницы.
+// Функция нужна для корректной работы валидатора инпутов в форме редактирования заголовков при первой загрузке страницы.
 const addInitTitle = () => {
   popupElements.popupRedactForm.name.setAttribute('value', 'П. И. Бекетов')
   popupElements.popupRedactForm.job.setAttribute('value', 'Русский землепроходец')
