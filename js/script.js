@@ -35,6 +35,7 @@ const popupElements = {
   subtitleJob: document.querySelector('.person__job'),
   popupRedactForm: document.forms.popupRedactForm,
   popupAddForm: document.forms.popupAddForm,
+  cardsContainer: document.querySelector('#photos'),
 };
 
 const handlePopupClose = (evt) => {
@@ -46,28 +47,11 @@ const handlePopupClose = (evt) => {
 }
 
 const openPopup = (popup) => {
-  if (popup === popupElements.popupAdd) {
-    popupElements.popupAddForm.cardName.value = '';
-    popupElements.popupAddForm.cardLink.value = '';
-
-    enableValidation(
-      {
-        fieldsetSelector: '.popup__fieldset',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__submit-btn',
-        inactiveButtonClass: 'popup__submit-btn_disabled',
-        inputErrorClass: 'popup__input_error',
-        errorClass: 'popup__input-error',
-      }
-    );
-  }
-
   popup.classList.add('popup_opened');
   popup.querySelector('.popup__content').classList.add('popup__content_opened');
 
   document.addEventListener('keydown', handlePopupClose);
-  popup.querySelector('.popup__overlay').addEventListener('click', handlePopupClose);
-  popup.querySelector('.popup__close').addEventListener('click', handlePopupClose);
+  popup.addEventListener('click', handlePopupClose);
 };
 
 const closePopup = (popup) => {
@@ -75,8 +59,7 @@ const closePopup = (popup) => {
   popup.querySelector('.popup__content').classList.remove('popup__content_opened');
 
   document.removeEventListener('keydown', handlePopupClose);
-  popup.querySelector('.popup__overlay').removeEventListener('click', handlePopupClose);
-  popup.querySelector('.popup__close').removeEventListener('click', handlePopupClose);
+  popup.removeEventListener('click', handlePopupClose);
 };
 
 const openProfilePopup = () => {
@@ -86,7 +69,7 @@ const openProfilePopup = () => {
 };
 
 const addNewCard = (card) => {
-  document.querySelector('#photos').prepend(card);
+  popupElements.cardsContainer.prepend(card);
 };
 
 const toggleLike = (card) => {
@@ -147,7 +130,6 @@ const handleFormAddCard = (evt) => {
   const card = createNewCard(cardTitle, cardImage);
   closePopup(popupElements.popupAdd);
   addNewCard(card);
-
 };
 
 const addInitCards = () => {
@@ -161,14 +143,20 @@ addInitCards();
 
 // Функция нужна для корректной работы валидатора инпутов в форме редактирования заголовков при первой загрузке страницы.
 const addInitTitle = () => {
-  popupElements.popupRedactForm.name.setAttribute('value', 'П. И. Бекетов')
-  popupElements.popupRedactForm.job.setAttribute('value', 'Русский землепроходец')
+  popupElements.popupRedactForm.name.setAttribute('value', 'П. И. Бекетов');
+  popupElements.popupRedactForm.job.setAttribute('value', 'Русский землепроходец');
 };
 
 addInitTitle();
 
 popupElements.openPopupRedactBut.addEventListener('click', openProfilePopup);
-popupElements.openPopupAddBut.addEventListener('click', () => openPopup(popupElements.popupAdd));
+popupElements.openPopupAddBut.addEventListener('click', () => {
+  popupElements.popupAddForm.reset();
+  const submitBtn = popupElements.popupAddForm.querySelector('.popup__submit-btn');
+  submitBtn.classList.add('popup__submit-btn_disabled');
+  submitBtn.setAttribute('disabled', true);
+  openPopup(popupElements.popupAdd);
+});
 
 popupElements.popupRedactForm.addEventListener('submit', handleFormRedactPopup);
 popupElements.popupAddForm.addEventListener('submit', handleFormAddCard);

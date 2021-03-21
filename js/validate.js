@@ -42,6 +42,7 @@ const setEventListeners = (fieldset, formSelectors) => {
   const buttonElement = fieldset.querySelector(formSelectors.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement, formSelectors);
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(fieldset, inputElement, formSelectors);
