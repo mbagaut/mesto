@@ -72,7 +72,7 @@ const handleFormAddCard = (evt) => {
   const cardTitle = popupElements.popupAddForm.cardName.value;
   const cardImage = popupElements.popupAddForm.cardLink.value;
   const templateSelector = '#card-template';
-  const newCardClass = new Card(cardTitle, cardImage, templateSelector, openPopup);
+  const newCardClass = new Card(cardTitle, cardImage, templateSelector, openPopup, popupElements);
   const newCard = newCardClass.createNewCard();
   closePopup(popupElements.popupAdd);
   addNewCard(newCard);
