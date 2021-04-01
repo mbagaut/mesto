@@ -36,6 +36,18 @@ const popupElements = {
   popupRedactForm: document.forms.popupRedactForm,
   popupAddForm: document.forms.popupAddForm,
   cardsContainer: document.querySelector('#photos'),
+  submitAddForm: document.forms.popupAddForm.querySelector('.popup__submit-btn'),
+  submitRedactForm: document.forms.popupRedactForm.querySelector('.popup__submit-btn'),
+  templateSelector: '#card-template',
+  popupsNodeList: document.querySelectorAll('.popup'),
 };
 
-export { initialCards, popupElements }
+const formSelectors = {
+  fieldsetSelector: '.popup__fieldset',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_disabled',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__input-error',
+}
+export { initialCards, popupElements, formSelectors }

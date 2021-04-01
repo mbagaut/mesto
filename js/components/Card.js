@@ -1,22 +1,26 @@
 export class Card {
-  constructor(title, image, cardSelector, openPopup, popupElements) {
-    this._cardSelector = cardSelector;
+  constructor(title, image, openPopup, popupElements) {
     this._title = title;
     this._image = image;
     this._openPopup = openPopup;
     this._popupElements = popupElements;
+    this._cardTemplate = popupElements.templateSelector;
+    this._popupTitle = popupElements.popupImg.querySelector('.popup__title_img-only');
+    this._popupImg = popupElements.popupImg.querySelector('.popup__image');
   }
 
   createNewCard() {
     const cardElement = document
-      .querySelector(this._cardSelector)
+      .querySelector(this._cardTemplate)
       .content
       .querySelector('.card')
       .cloneNode(true);
 
-    cardElement.querySelector('.photos__image').src = this._image;
-    cardElement.querySelector('.photos__image').alt = this._title;
-    cardElement.querySelector('.photos__title').textContent = this._title;
+    this._cardImg = cardElement.querySelector('.photos__image');
+    this._cardTitle = cardElement.querySelector('.photos__title');
+    this._cardImg.src = this._image;
+    this._cardImg.alt = this._title;
+    this._cardTitle.textContent = this._title;
 
     this._setEventListeners(cardElement);
 
@@ -43,9 +47,9 @@ export class Card {
   }
 
   _handlePhotoClick(cardImg, cardTitle) {
-    this._popupElements.popupImg.querySelector('.popup__title_img-only').textContent = cardTitle.textContent;
-    this._popupElements.popupImg.querySelector('.popup__image').src = cardImg.src;
-    this._popupElements.popupImg.querySelector('.popup__image').alt = cardTitle.textContent;
+    this._popupTitle.textContent = cardTitle.textContent;
+    this._popupImg.src = cardImg.src;
+    this._popupImg.alt = cardTitle.textContent;
 
     this._openPopup(this._popupElements.popupImg);
   }

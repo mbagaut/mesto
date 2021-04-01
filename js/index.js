@@ -1,37 +1,23 @@
-import { initialCards, popupElements } from './utils/constants.js'
+import { initialCards, popupElements, formSelectors } from './utils/constants.js'
 import { Card } from './components/Card.js'
 import { FormValidator } from './components/FormValidator.js'
 
-const getForms = () => {
-  const formList = Array.from(document.forms);
 
-  formList.forEach((form) => {
-    form.addEventListener('submit', (evt) => evt.preventDefault());
+const addCardFormValidator = new FormValidator(formSelectors, popupElements.popupAddForm);
+const editProfileFormValidator = new FormValidator(formSelectors, popupElements.popupRedactForm);
 
-    const validationFormClass = new FormValidator(
-      {
-        fieldsetSelector: '.popup__fieldset',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__submit-btn',
-        inactiveButtonClass: 'popup__submit-btn_disabled',
-        inputErrorClass: 'popup__input_error',
-        errorClass: 'popup__input-error',
-      },
-      form
-    );
-    validationFormClass.enableValidation();
-  });
-}
+addCardFormValidator.enableValidation();
+editProfileFormValidator.enableValidation();
 
-getForms();
+
 
 const handlePopupClose = (evt) => {
-  const popups = [popupElements.popupAdd, popupElements.popupImg, popupElements.popupRedact];
-  const openedPopup = popups.find((popup) => popup.classList.contains('popup_opened'));
-  if (evt.key === 'Escape' || evt.target.classList.contains('popup__overlay') || evt.target.classList.contains('popup__close')) {
-    closePopup(openedPopup);
-  }
-}
+  popupElements.popupsNodeList.forEach((popup) => {
+    if (evt.key === 'Escape' || evt.target.classList.contains('popup__overlay') || evt.target.classList.contains('popup__close') && popup.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+  })
+};
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -46,19 +32,15 @@ const closePopup = (popup) => {
 
   document.removeEventListener('keydown', handlePopupClose);
   popup.removeEventListener('click', handlePopupClose);
-};
 
-const openProfilePopup = () => {
-  popupElements.popupRedactForm.name.setAttribute('value', popupElements.titleName.textContent)
-  popupElements.popupRedactForm.job.setAttribute('value', popupElements.subtitleJob.textContent)
-  openPopup(popupElements.popupRedact);
+
 };
 
 const addNewCard = (newCard) => {
   popupElements.cardsContainer.prepend(newCard);
 };
 
-const handleFormRedactPopup = (evt) => {
+const handleEditProfileSubmit = (evt) => {
   evt.preventDefault();
 
   popupElements.titleName.textContent = popupRedactForm.name.value;
@@ -66,38 +48,68 @@ const handleFormRedactPopup = (evt) => {
   closePopup(popupElements.popupRedact);
 };
 
-const handleFormAddCard = (evt) => {
+const createCard = (cardTitle, cardImage) => new Card(cardTitle, cardImage, openPopup, popupElements).createNewCard();
+
+
+const handleAddCardSubmit = (evt) => {
   evt.preventDefault();
 
   const cardTitle = popupElements.popupAddForm.cardName.value;
   const cardImage = popupElements.popupAddForm.cardLink.value;
-  const templateSelector = '#card-template';
-  const newCardClass = new Card(cardTitle, cardImage, templateSelector, openPopup, popupElements);
-  const newCard = newCardClass.createNewCard();
+  const newCard = createCard(cardTitle, cardImage);
+
   closePopup(popupElements.popupAdd);
   addNewCard(newCard);
-
 };
 
 const addInitCards = () => {
   initialCards.forEach((item) => {
-    const templateSelector = '#card-template';
-    const newCardClass = new Card(item.name, item.link, templateSelector, openPopup, popupElements);
-    const newCard = newCardClass.createNewCard();
+    const newCard = createCard(item.name, item.link);
+
     addNewCard(newCard);
   });
 };
 
 addInitCards();
 
-popupElements.openPopupRedactBut.addEventListener('click', openProfilePopup);
-popupElements.openPopupAddBut.addEventListener('click', () => {
-  popupElements.popupAddForm.reset();
-  const submitBtn = popupElements.popupAddForm.querySelector('.popup__submit-btn');
-  submitBtn.classList.add('popup__submit-btn_disabled');
-  submitBtn.setAttribute('disabled', true);
-  openPopup(popupElements.popupAdd);
+const prepareForm = (form, submitBtn) => {
+  console.log('You are not prepared!');
+
+  const popupErrorsText = form.querySelectorAll('.popup__input-error');
+  const popupErrorsBorder = form.querySelectorAll('.popup__input_error');
+
+  if (popupErrorsText) {
+    popupErrorsText.forEach((popupErr) => {
+      popupErr.textContent = '';
+    })
+
+    popupErrorsBorder.forEach((popupErr) => {
+      popupErr.classList.remove('popup__input_error');
+    })
+
+    submitBtn.classList.add('popup__submit-btn_disabled');
+    submitBtn.setAttribute('disabled', true);
+
+    if (form === popupElements.popupRedactForm) {
+      popupElements.popupRedactForm.name.value = popupElements.titleName.textContent;
+      popupElements.popupRedactForm.job.value = popupElements.subtitleJob.textContent;
+    }
+  }
+
+  console.log('Sometimes the hand of fate must be forced');
+};
+
+popupElements.popupRedactForm.addEventListener('submit', handleEditProfileSubmit);
+popupElements.popupAddForm.addEventListener('submit', handleAddCardSubmit);
+
+popupElements.openPopupRedactBut.addEventListener('click', () => {
+  prepareForm(popupElements.popupRedactForm, popupElements.submitRedactForm);
+  openPopup(popupElements.popupRedact);
 });
 
-popupElements.popupRedactForm.addEventListener('submit', handleFormRedactPopup);
-popupElements.popupAddForm.addEventListener('submit', handleFormAddCard);
+popupElements.openPopupAddBut.addEventListener('click', () => {
+  popupElements.popupAddForm.reset();
+
+  prepareForm(popupElements.popupAdd, popupElements.submitAddForm);
+  openPopup(popupElements.popupAdd);
+});
