@@ -9,8 +9,6 @@ const editProfileFormValidator = new FormValidator(formSelectors, popupElements.
 addCardFormValidator.enableValidation();
 editProfileFormValidator.enableValidation();
 
-
-
 const handlePopupClose = (evt) => {
   popupElements.popupsNodeList.forEach((popup) => {
     if (evt.key === 'Escape' || evt.target.classList.contains('popup__overlay') || evt.target.classList.contains('popup__close') && popup.classList.contains('popup_opened')) {
@@ -22,6 +20,7 @@ const handlePopupClose = (evt) => {
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   popup.querySelector('.popup__content').classList.add('popup__content_opened');
+
   document.addEventListener('keydown', handlePopupClose);
   popup.addEventListener('click', handlePopupClose);
 };
@@ -32,8 +31,6 @@ const closePopup = (popup) => {
 
   document.removeEventListener('keydown', handlePopupClose);
   popup.removeEventListener('click', handlePopupClose);
-
-
 };
 
 const addNewCard = (newCard) => {
@@ -49,7 +46,6 @@ const handleEditProfileSubmit = (evt) => {
 };
 
 const createCard = (cardTitle, cardImage) => new Card(cardTitle, cardImage, openPopup, popupElements).createNewCard();
-
 
 const handleAddCardSubmit = (evt) => {
   evt.preventDefault();
@@ -72,44 +68,22 @@ const addInitCards = () => {
 
 addInitCards();
 
-const prepareForm = (form, submitBtn) => {
-  console.log('You are not prepared!');
-
-  const popupErrorsText = form.querySelectorAll('.popup__input-error');
-  const popupErrorsBorder = form.querySelectorAll('.popup__input_error');
-
-  if (popupErrorsText) {
-    popupErrorsText.forEach((popupErr) => {
-      popupErr.textContent = '';
-    })
-
-    popupErrorsBorder.forEach((popupErr) => {
-      popupErr.classList.remove('popup__input_error');
-    })
-
-    submitBtn.classList.add('popup__submit-btn_disabled');
-    submitBtn.setAttribute('disabled', true);
-
-    if (form === popupElements.popupRedactForm) {
-      popupElements.popupRedactForm.name.value = popupElements.titleName.textContent;
-      popupElements.popupRedactForm.job.value = popupElements.subtitleJob.textContent;
-    }
-  }
-
-  console.log('Sometimes the hand of fate must be forced');
+const fillEditProfileFormFields = () => {
+  popupElements.popupRedactForm.name.value = popupElements.titleName.textContent;
+  popupElements.popupRedactForm.job.value = popupElements.subtitleJob.textContent;
 };
 
 popupElements.popupRedactForm.addEventListener('submit', handleEditProfileSubmit);
 popupElements.popupAddForm.addEventListener('submit', handleAddCardSubmit);
 
 popupElements.openPopupRedactBut.addEventListener('click', () => {
-  prepareForm(popupElements.popupRedactForm, popupElements.submitRedactForm);
+  fillEditProfileFormFields();
+  editProfileFormValidator.removeValidationErrors();
   openPopup(popupElements.popupRedact);
 });
 
 popupElements.openPopupAddBut.addEventListener('click', () => {
   popupElements.popupAddForm.reset();
-
-  prepareForm(popupElements.popupAdd, popupElements.submitAddForm);
+  addCardFormValidator.removeValidationErrors();
   openPopup(popupElements.popupAdd);
 });

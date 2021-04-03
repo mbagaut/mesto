@@ -2,6 +2,7 @@ export class FormValidator {
   constructor(formSelectors, currentForm) {
     this._formSelectors = formSelectors;
     this._currentForm = currentForm;
+    this._submitBtn = this._currentForm.querySelector(this._formSelectors.submitButtonSelector);
   }
 
   enableValidation() {
@@ -63,5 +64,30 @@ export class FormValidator {
     inputElement.classList.remove(this._formSelectors.inputErrorClass);
     errorElement.classList.remove(this._formSelectors.errorClass);
     errorElement.textContent = '';
+  }
+
+  removeValidationErrors() {
+    const popupErrorsText = this._currentForm.querySelectorAll(`.${this._formSelectors.errorClass}`);
+    const popupErrorsBorder = this._currentForm.querySelectorAll(`.${this._formSelectors.inputErrorClass}`);
+
+    if (popupErrorsText) {
+
+      // Затрёт сообщение об ошибке
+      popupErrorsText.forEach((popupErr) => {
+        popupErr.textContent = '';
+      })
+
+      // Удалит красное подчеркивание инпута
+      popupErrorsBorder.forEach((popupErr) => {
+        popupErr.classList.remove(this._formSelectors.inputErrorClass);
+      })
+
+      this._disableButtonState();
+    }
+  }
+
+  _disableButtonState() {
+    this._submitBtn.classList.add(this._formSelectors.inactiveButtonClass);
+    this._submitBtn.setAttribute('disabled', true);
   }
 }
