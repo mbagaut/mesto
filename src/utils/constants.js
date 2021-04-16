@@ -1,27 +1,35 @@
+const olekminsk = new URL('../images/olekminsk.jpg', import.meta.url);
+const yakutsk = new URL('../images/yakutsk.jpg', import.meta.url);
+const nerchinsk = new URL('../images/nerchinsk.jpg', import.meta.url);
+const chita = new URL('../images/chita.jpg', import.meta.url);
+const eniseisk = new URL('../images/eniseisk.jpg', import.meta.url);
+const beketov2 = new URL('../images/beketov2.jpg', import.meta.url);
+
+
 const initialCards = [
   {
     name: 'Олёкминск',
-    link: 'images/olekminsk.jpg'
+    img: olekminsk
   },
   {
     name: 'Якутск',
-    link: 'images/yakutsk.jpg'
+    img: yakutsk
   },
   {
     name: 'Нерчинск',
-    link: 'images/nerchinsk.jpg'
+    img: nerchinsk
   },
   {
     name: 'Чита',
-    link: 'images/chita.jpg'
+    img: chita
   },
   {
     name: 'Енисейск',
-    link: 'images/eniseisk.jpg'
+    img: eniseisk
   },
   {
     name: 'Якутск',
-    link: 'images/beketov2.jpg'
+    img: beketov2
   }
 ];
 

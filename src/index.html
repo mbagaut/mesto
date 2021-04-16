@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base target="_self">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css" />
     <meta name="description" content="Страница об интересных местах в России">
     <meta name="keywords" content="Путешествия, Россия, П. И. Бекетов, Олёкминск, Якутск, Нерчинск, Чита, Енисейск">
     <meta name="author" content="Багаутдинов Марат">
@@ -18,7 +17,7 @@
     <main class="main page__main">
       <section class="person main__person">
         <div class="person__header">
-          <img class="person__photo" src="images/beketov.jpg" alt="П. И. Бекетов">
+          <img class="person__photo" src="<%=require('./images/beketov.jpeg')%>" alt="П. И. Бекетов">
           <div class="person__container">
             <div class="person__string">
               <h1 class="person__title">П. И. Бекетов</h1>
@@ -114,6 +113,5 @@
       </li>
     </template>
 
-    <script type="module" src="js/index.js"></script>
   </body>
 </html>

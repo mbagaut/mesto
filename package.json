@@ -1,0 +1,39 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "------\r *[Проект](https://mbagaut.github.io/mesto/) выполнен в рамках курса [Яндекс.Практикум \"Веб-разработка\"](https://praktikum.yandex.ru/web)*",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbagaut/mesto.git"
+  },
+  "author": "Bagautdinov Marat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbagaut/mesto/issues"
+  },
+  "homepage": "https://github.com/mbagaut/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.15",
+    "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^5.2.1",
+    "cssnano": "^5.0.1",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.4.1",
+    "postcss-loader": "^5.2.0",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "core-js": "^3.10.1"
+  }
+}
