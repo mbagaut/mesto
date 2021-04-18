@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
 module.exports = {
   entry: { main: './src/pages/index.js' },
   output: {
@@ -29,11 +28,12 @@ module.exports = {
       type: 'asset/resource'
     },
     {
-      test: /\.css$/,
+      test: /\.(s)?css$/,
       use: [MiniCssExtractPlugin.loader, {
         loader: 'css-loader',
         options: { importLoaders: 1 }
       },
+        'sass-loader',
         'postcss-loader']
     },
     ]
