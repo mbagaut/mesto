@@ -12,17 +12,7 @@ export default class PopupWithImage extends Popup {
     this._popupTitle.textContent = cardTitle.textContent;
     this._popupImg.src = cardImg.src;
     this._popupTitle.alt = cardTitle.textContent;
-    document.addEventListener('keydown', this._handlePopupClose);
-
-    super.open();
-  }
-
-  setEventListeners() {
     this._popup.addEventListener('click', this._handlePopupClose);
-  }
-
-  close() {
-    this._popup.classList.remove('popup_opened');
-    this._popup.querySelector('.popup__content').classList.remove('popup__content_opened');
+    super.open();
   }
 }

@@ -11,9 +11,9 @@ import PopupWithForm from '../components/PopupWithForm.js'
 
 const userInformation = new UserInfo(popupElements);
 
-const popupImgInstance = new PopupWithImage(popupElements.popupImg);
-popupImgInstance.setEventListeners();
-const handleCardClick = (cardImg, cardTitle) => { popupImgInstance.open(cardImg, cardTitle); }
+const popupImg = new PopupWithImage(popupElements.popupImg);
+popupImg.setEventListeners();
+const handleCardClick = (cardImg, cardTitle) => { popupImg.open(cardImg, cardTitle); }
 
 const addCardFormValidator = new FormValidator(formSelectors, popupElements.popupAddForm);
 const editProfileFormValidator = new FormValidator(formSelectors, popupElements.popupRedactForm);
@@ -36,33 +36,30 @@ const handleEditProfileSubmit = (formValues) => {
   const inputJob = formValues.job;
 
   userInformation.setUserInfo({ inputName, inputJob });
-
-  popupRedactInstance.close()
+  popupRedact.close()
 };
 
 const handleAddCardSubmit = (formValues) => {
   const cardElement = new UserCard(formValues, popupElements, handleCardClick).generateCard();
-  popupAddInstance.close()
+  popupAdd.close()
   cardsList.addItem(cardElement);
 };
 
-const popupRedactInstance = new PopupWithForm(popupElements.popupRedact, handleEditProfileSubmit);
-const popupAddInstance = new PopupWithForm(popupElements.popupAdd, handleAddCardSubmit);
+const popupRedact = new PopupWithForm(popupElements.popupRedact, handleEditProfileSubmit);
+popupRedact.setEventListeners();
 
+const popupAdd = new PopupWithForm(popupElements.popupAdd, handleAddCardSubmit);
+popupAdd.setEventListeners();
 
 popupElements.openPopupRedactBut.addEventListener('click', () => {
-
   popupElements.popupRedactForm.name.value = userInformation.getUserInfo().titleName;
   popupElements.popupRedactForm.job.value = userInformation.getUserInfo().subtitleJob;
 
   editProfileFormValidator.removeValidationErrors();
-  popupRedactInstance.open();
-  popupRedactInstance.setEventListeners();
+  popupRedact.open();
 });
 
 popupElements.openPopupAddBut.addEventListener('click', () => {
-
   addCardFormValidator.removeValidationErrors();
-  popupAddInstance.open();
-  popupAddInstance.setEventListeners();
+  popupAdd.open();
 });
