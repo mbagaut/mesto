@@ -1,19 +1,41 @@
-export class Card {
-  constructor(popupElements, handleCardClick) {
-    this._cardTemplate = popupElements.templateSelector;
-    this._popupElements = popupElements;
+export default class Card {
+  constructor(data, api, { popupSelectors, handleCardClick, handleDelClick }) {
+    this._api = api;
+    this._cardTemplate = popupSelectors.templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDelClick = handleDelClick;
+    this._name = data.name;
+    this._link = data.link;
+    this._owner = data.owner;
+    this._likes = data.likes;
+    this._cardId = data._id;
   }
 
-  generateCard() {
+  generateCard(userData) {
     this._element = this._getTemplate();
     this._setEventListeners();
 
     this._cardImg = this._element.querySelector('.photos__image');
     this._cardTitle = this._element.querySelector('.photos__title');
-    this._cardImg.src = this._image;
-    this._cardImg.alt = this._title;
-    this._cardTitle.textContent = this._title;
+    this._likeCounter = this._element.querySelector('.photos__like-counter');
+    this._cardImg.src = this._link;
+    this._cardImg.alt = this._name;
+
+    this._cardTitle.textContent = this._name;
+    this._likeCounter.textContent = this._likes.length;
+
+    if (userData._id === this._owner._id) {
+      this._element.querySelector('.photos__icon-del').style.display = 'block';
+    }
+
+    if (+this._likeCounter.textContent < 1) {
+      this._element.querySelector('.photos__like-counter').style.display = 'none';
+      this._element.querySelector('.photos__like-column').style.display = 'block';
+    }
+
+    if (this._likes.find((like) => like._id === userData._id)) {
+      this._element.querySelector('.photos__icon').classList.add('photos__icon_active');
+    }
 
     return this._element;
   }
@@ -35,16 +57,34 @@ export class Card {
     const cardTitle = this._element.querySelector('.photos__string');
 
     likeBut.addEventListener('click', () => this._handleLikeClick(likeBut));
-    delBut.addEventListener('click', () => this._handleDelClick());
+    delBut.addEventListener('click', () => this._handleDelClick(this._element));
     cardImg.addEventListener('click', () => this._handleCardClick(cardImg, cardTitle));
   }
 
   _handleLikeClick(likeBut) {
-    likeBut.classList.toggle('photos__icon_active');
-  }
+    if (!likeBut.classList.contains('photos__icon_active')) {
 
-  _handleDelClick() {
-    this._element.remove();
-  }
+      this._api.putLike(this._cardId)
+        .then((data) => {
+          likeBut.classList.add('photos__icon_active');
+          this._likeCounter.textContent = data.likes.length;
+          this._element.querySelector('.photos__like-counter').style.display = 'block';
+          this._element.querySelector('.photos__like-column').style.display = 'flex';
+        })
+        .catch((err) => console.log(`АЛЯРМ!: ${err}`));
 
+    } else {
+
+      this._api.deleteLike(this._cardId)
+        .then((data) => {
+          likeBut.classList.remove('photos__icon_active');
+          this._likeCounter.textContent = data.likes.length;
+          if (+this._likeCounter.textContent < 1) {
+            this._element.querySelector('.photos__like-counter').style.display = 'none';
+            this._element.querySelector('.photos__like-column').style.display = 'block';
+          }
+        })
+        .catch((err) => console.log(`АЛЯРМ!: ${err}`));
+    }
+  }
 }

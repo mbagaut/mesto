@@ -1,53 +1,27 @@
-const olekminsk = new URL('../images/olekminsk.jpg', import.meta.url);
-const yakutsk = new URL('../images/yakutsk.jpg', import.meta.url);
-const nerchinsk = new URL('../images/nerchinsk.jpg', import.meta.url);
-const chita = new URL('../images/chita.jpg', import.meta.url);
-const eniseisk = new URL('../images/eniseisk.jpg', import.meta.url);
-const beketov2 = new URL('../images/beketov2.jpg', import.meta.url);
+// const olekminsk = new URL('../images/olekminsk.jpg', import.meta.url);
+// const yakutsk = new URL('../images/yakutsk.jpg', import.meta.url);
+// const nerchinsk = new URL('../images/nerchinsk.jpg', import.meta.url);
+// const chita = new URL('../images/chita.jpg', import.meta.url);
+// const eniseisk = new URL('../images/eniseisk.jpg', import.meta.url);
+// const beketov2 = new URL('../images/beketov2.jpg', import.meta.url);
 
+const popupSelectors = {
+  openPopupAvatarBut: '#popup-avatar-but',
+  openPopupRedactBut: '#popup-redact-but',
+  openPopupAddBut: '#popup-add-but',
 
-const initialCards = [
-  {
-    name: 'Олёкминск',
-    img: olekminsk
-  },
-  {
-    name: 'Якутск',
-    img: yakutsk
-  },
-  {
-    name: 'Нерчинск',
-    img: nerchinsk
-  },
-  {
-    name: 'Чита',
-    img: chita
-  },
-  {
-    name: 'Енисейск',
-    img: eniseisk
-  },
-  {
-    name: 'Якутск',
-    img: beketov2
-  }
-];
+  popupAvatar: '#popup-avatar',
+  popupRedact: '#popup-redact',
+  popupAdd: '#popup-add',
+  popupImg: '#popup-img',
+  popupDel: '#popup-del',
 
-const popupElements = {
-  openPopupRedactBut: document.querySelector('#popup-redact-but'),
-  openPopupAddBut: document.querySelector('#popup-add-but'),
-  popupRedact: document.querySelector('#popup-redact'),
-  popupAdd: document.querySelector('#popup-add'),
-  popupImg: document.querySelector('#popup-img'),
-  titleName: document.querySelector('.person__title'),
-  subtitleJob: document.querySelector('.person__job'),
-  popupRedactForm: document.forms.popupRedactForm,
-  popupAddForm: document.forms.popupAddForm,
-  cardsContainer: document.querySelector('#photos'),
-  submitAddForm: document.forms.popupAddForm.querySelector('.popup__submit-btn'),
-  submitRedactForm: document.forms.popupRedactForm.querySelector('.popup__submit-btn'),
+  titleName: '.person__title',
+  subtitleJob: '.person__job',
+  avatarImg: '.person__photo',
+
+  cardsContainer: '#photos',
   templateSelector: '#card-template',
-  popupsNodeList: document.querySelectorAll('.popup'),
 };
 
 const formSelectors = {
@@ -58,4 +32,4 @@ const formSelectors = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__input-error',
 }
-export { initialCards, popupElements, formSelectors }
+export { popupSelectors, formSelectors }

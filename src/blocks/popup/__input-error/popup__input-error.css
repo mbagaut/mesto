@@ -1,5 +1,6 @@
 .popup__input-error {
   display: block;
+  position: absolute;
   box-sizing: border-box;
   margin-top: 5px;
   color: rgba(255, 0, 0, 1);

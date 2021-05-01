@@ -17,7 +17,10 @@
     <main class="main page__main">
       <section class="person main__person">
         <div class="person__header">
-          <img class="person__photo" src="<%=require('./images/beketov.jpeg')%>" alt="П. И. Бекетов">
+          <div class="person__avatar">
+            <img class="person__photo" src="<%=require('./images/beketov.jpeg')%>" alt="П. И. Бекетов">
+            <button id="popup-avatar-but" class="person__photo-btn"></button>
+          </div>
           <div class="person__container">
             <div class="person__string">
               <h1 class="person__title">П. И. Бекетов</h1>
@@ -54,7 +57,7 @@
             </label>
 
             <label class="popup__field">
-              <input class="popup__input" tabindex="2" id="job-input" type="text" name="job" placeholder="Исследователь океана" required minlength="2" maxlength="200">
+              <input class="popup__input" tabindex="2" id="job-input" type="text" name="about" placeholder="Исследователь океана" required minlength="2" maxlength="200">
               <span class="job-input-error"></span>
             </label>
 
@@ -83,7 +86,43 @@
               <span class="link-input-error"></span>
             </label>
 
+            <button class="popup__submit-btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Создать</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <section id="popup-avatar" class="popup">
+      <div class="popup__overlay"></div>
+
+      <div class="popup__content">
+        <button class="popup__close btn-opacity btn-opacity_type_medium" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+
+        <form class="popup__form" name="popupAvatarForm" action="#" method="POST">
+          <fieldset class="popup__fieldset">
+
+            <label class="popup__field popup__field_avatar">
+              <input class="popup__input" tabindex="1" id="link-input" type="url" name="avatarLink" placeholder="Ссылка на картинку" required>
+              <span class="link-input-error"></span>
+            </label>
+
             <button class="popup__submit-btn btn-opacity btn-opacity_type_high" tabindex="18" type="submit">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <section id="popup-del" class="popup">
+      <div class="popup__overlay"></div>
+
+      <div class="popup__content">
+        <button class="popup__close btn-opacity btn-opacity_type_medium" type="button"></button>
+        <h2 class="popup__title popup__title_popup-del">Вы уверены?</h2>
+
+        <form class="popup__form" name="popupDelForm" action="#" method="POST">
+          <fieldset class="popup__fieldset">
+            <button class="popup__submit-btn btn-opacity btn-opacity_type_high popup__submit-btn_popup-del" tabindex="18" type="submit">Да</button>
           </fieldset>
         </form>
       </div>
@@ -107,7 +146,10 @@
           <button class="photos__icon-del btn-opacity btn-opacity_type_low" type="button"></button>
           <div class="photos__string">
             <h2 class="photos__title"></h2>
-            <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+            <div class="photos__like-column">
+              <button class="photos__icon btn-opacity btn-opacity_type_low" type="button"></button>
+              <span class='photos__like-counter'>0</span>
+            </div>
           </div>
         </article>
       </li>

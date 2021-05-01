@@ -1,9 +1,5 @@
 .popup__field:first-child {
   box-sizing: border-box;
   display: block;
-  margin-bottom: 30px;
-}
-
-.popup__field:last-child {
-  margin-bottom: 0;
+  margin-bottom: 36px;
 }

@@ -10,4 +10,5 @@
   -o-transition: all 0.2s ease 0.1s;
   transition: all 0.2s ease 0.1s;
   cursor: pointer;
+  margin-bottom: 6px;
 }

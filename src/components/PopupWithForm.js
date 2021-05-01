@@ -18,7 +18,7 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    super.setEventListeners()
+    super.setEventListeners();
     this._popup.addEventListener('submit', this._submitForm);
   }
 
@@ -35,5 +35,22 @@ export default class PopupWithForm extends Popup {
   _removeEventListeners() {
     super._removeEventListeners()
     this._popup.removeEventListener('submit', this._disableDefaultBehavior);
+  }
+
+  loadingProcess(onLoad) {
+    this._submitBtn = this._popup.querySelector('.popup__submit-btn');
+    if (this._popup.id === 'popup-add') {
+      if (onLoad) {
+        this._submitBtn.textContent = `Создаём...`;
+      } else {
+        this._submitBtn.textContent = `Создать`;
+      }
+    } else {
+      if (onLoad) {
+        this._submitBtn.textContent = `Сохраняем...`;
+      } else {
+        this._submitBtn.textContent = `Сохранить`;
+      }
+    }
   }
 }
