@@ -53,14 +53,14 @@ export class FormValidator {
   }
 
   _showInputError(fieldset, inputElement, errorMessage) {
-    const errorElement = fieldset.querySelector(`.${inputElement.id}-error`);
+    const errorElement = fieldset.querySelector(`.${inputElement.id.replace(/([0-9])/g, '')}-error`);
     inputElement.classList.add(this._formSelectors.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._formSelectors.errorClass);
   }
 
   _hideInputError(fieldset, inputElement) {
-    const errorElement = fieldset.querySelector(`.${inputElement.id}-error`);
+    const errorElement = fieldset.querySelector(`.${inputElement.id.replace(/([0-9])/g, '')}-error`);
     inputElement.classList.remove(this._formSelectors.inputErrorClass);
     errorElement.classList.remove(this._formSelectors.errorClass);
     errorElement.textContent = '';

@@ -83,7 +83,6 @@ const cardsList = new Section({
 // Попап добавления карточек
 const handleAddCardSubmit = (formValues) => {
   popupAdd.loadingProcess(true);
-  console.log(document.querySelector(popupSelectors.popupSubmitBtn))
   let { cardName: name, cardLink: link } = formValues;
   api.postCard(name, link)
     .then((cardData) => {
