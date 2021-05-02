@@ -1,3 +1,5 @@
+// Огромное спасибо! Лучшее ревью за весь курс, нет слов.
+
 import './index.css';
 
 import { selectors, formSelectors } from '../utils/constants.js'
@@ -37,19 +39,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
   })
   .catch((err) => console.log(`АЛЯРМ!: ${err}`));
 
-// // Получить userInfo
-// api.getUserInfo()
-//   .then((userInfo) => {
-//     userInformation.setUserInfo(userInfo);
-//     userInformation.setNewAvatar(userInfo);
-//   })
-//   .catch((err) => console.log(`АЛЯРМ!: ${err}`));
-
-// // Загрузить даннные карточек
-// api.getCards()
-//   .then((cards) => cardsList.renderCards(cards))
-//   .catch((err) => console.log(`АЛЯРМ!: ${err}`));
-
 
 const popupImg = new PopupWithImage(document.querySelector(selectors.popupImg));
 popupImg.setEventListeners();
@@ -85,7 +74,7 @@ const cardsList = new Section({
 // Попап добавления карточек
 const handleAddCardSubmit = (formValues) => {
   popupAdd.loadingProcess('Создаём...');
-  let { cardName: name, cardLink: link } = formValues;
+  const { cardName: name, cardLink: link } = formValues;
   api.postCard(name, link)
     .then((cardData) => {
       const cardElement = createNewCard(cardData);

@@ -14,10 +14,6 @@ export default class PopupCardDel extends Popup {
     super.open();
   }
 
-  setEventListeners() {
-    super.setEventListeners();
-  }
-
   _submitForm = (evt) => {
     evt.preventDefault();
     this._api.deleteCard(this._cardItem._id)
