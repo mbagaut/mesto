@@ -1,6 +1,6 @@
 import './index.css';
 
-import { popupSelectors, formSelectors } from '../utils/constants.js'
+import { selectors, formSelectors } from '../utils/constants.js'
 import { FormValidator } from '../components/FormValidator.js'
 import { Section } from '../components/Section.js'
 import { UserInfo } from '../components/UserInfo.js'
@@ -10,7 +10,7 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import PopupCardDel from '../components/PopupCardDel.js'
 
-const userInformation = new UserInfo(popupSelectors);
+const userInformation = new UserInfo(selectors);
 const addCardFormValidator = new FormValidator(formSelectors, document.forms.popupAddForm);
 const editProfileFormValidator = new FormValidator(formSelectors, document.forms.popupRedactForm);
 const avatarFormValidator = new FormValidator(formSelectors, document.forms.popupAvatarForm);
@@ -27,41 +27,46 @@ const api = new Api({
   }
 });
 
-// Получить userInfo
-api.getUserInfo()
-  .then((userInfo) => {
-    userInformation.setUserInfo(userInfo);
-    userInformation.setNewAvatar(userInfo);
+
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then((data) => {
+    // console.log(data[0], data[1])
+    userInformation.setUserInfo(data[0]);
+    userInformation.setNewAvatar(data[0]);
+    cardsList.renderCards(data[1]);
   })
   .catch((err) => console.log(`АЛЯРМ!: ${err}`));
 
-// Загрузить даннные карточек
-api.getCards()
-  .then((cards) => cardsList.renderCards(cards))
-  .catch((err) => console.log(`АЛЯРМ!: ${err}`));
+// // Получить userInfo
+// api.getUserInfo()
+//   .then((userInfo) => {
+//     userInformation.setUserInfo(userInfo);
+//     userInformation.setNewAvatar(userInfo);
+//   })
+//   .catch((err) => console.log(`АЛЯРМ!: ${err}`));
+
+// // Загрузить даннные карточек
+// api.getCards()
+//   .then((cards) => cardsList.renderCards(cards))
+//   .catch((err) => console.log(`АЛЯРМ!: ${err}`));
+
+
+const popupImg = new PopupWithImage(document.querySelector(selectors.popupImg));
+popupImg.setEventListeners();
+
+const popupDel = new PopupCardDel(document.querySelector(selectors.popupDel), api);
+popupDel.setEventListeners();
 
 
 // Создать новую карточку
 const createNewCard = (cardData) => {
   return new Card(cardData, api, {
-    popupSelectors,
+    selectors,
     handleCardClick: () => {
-      const popupImg = new PopupWithImage(
-        document.querySelector(popupSelectors.popupImg),
-        cardData
-      );
-      popupImg.setEventListeners();
-      popupImg.open()
+      popupImg.open(cardData)
     },
     handleDelClick: (card) => {
-      const popupDel = new PopupCardDel(
-        document.querySelector(popupSelectors.popupDel),
-        api,
-        cardData,
-        card
-      );
-      popupDel.setEventListeners();
-      popupDel.open(cardData)
+      popupDel.open(cardData, card)
     }
   })
 };
@@ -71,57 +76,51 @@ const createNewCard = (cardData) => {
 const cardsList = new Section({
   renderer: (cardData) => {
     const cardElement = createNewCard(cardData);
-    api.getUserInfo()
-      .then((data) => {
-        cardsList.addItem(cardElement.generateCard(data));
-      })
-      .catch((err) => console.log(`АЛЯРМ!: ${err}`));
+    const userData = userInformation.getUserInfo();
+    cardsList.addItem(cardElement.generateCard(userData));
   }
-}, popupSelectors);
+}, selectors);
 
 
 // Попап добавления карточек
 const handleAddCardSubmit = (formValues) => {
-  popupAdd.loadingProcess(true);
+  popupAdd.loadingProcess('Создаём...');
   let { cardName: name, cardLink: link } = formValues;
   api.postCard(name, link)
     .then((cardData) => {
       const cardElement = createNewCard(cardData);
-      api.getUserInfo()
-        .then((data) => {
-          cardsList.addItem(cardElement.generateCard(data));
-        })
-        .catch((err) => console.log(`АЛЯРМ!: ${err}`))
+      const userData = userInformation.getUserInfo();
+      cardsList.addItem(cardElement.generateCard(userData));
+      popupAdd.close()
     })
     .catch((err) => console.log(`АЛЯРМ!: ${err}`))
     .finally(() => {
-      popupAdd.close()
-      popupAdd.loadingProcess();
+      popupAdd.loadingProcess('Создать');
     });
 };
 
 const popupAdd = new PopupWithForm(
-  document.querySelector(popupSelectors.popupAdd),
+  document.querySelector(selectors.popupAdd),
   handleAddCardSubmit);
 popupAdd.setEventListeners();
 
 
 // Попап смены аватара
 const handleAvatarSubmit = (formValues) => {
-  popupAvatar.loadingProcess(true);
+  popupAvatar.loadingProcess('Сохраняем...');
   api.changeAvatar(formValues.avatarLink)
     .then((userInfo) => {
       userInformation.setNewAvatar(userInfo);
+      popupAvatar.close();
     })
     .catch((err) => console.log(`АЛЯРМ!: ${err}`))
     .finally(() => {
-      popupAvatar.close();
-      popupAvatar.loadingProcess();
+      popupAvatar.loadingProcess('Сохранить');
     })
 }
 
 const popupAvatar = new PopupWithForm(
-  document.querySelector(popupSelectors.popupAvatar),
+  document.querySelector(selectors.popupAvatar),
   handleAvatarSubmit
 );
 popupAvatar.setEventListeners();
@@ -129,30 +128,32 @@ popupAvatar.setEventListeners();
 
 // Попап информации о пользователе
 const handleEditProfileSubmit = (formValues) => {
-  popupRedact.loadingProcess(true);
-  userInformation.setUserInfo(formValues);
+  popupRedact.loadingProcess('Сохраняем...');
   api.changeUserInfo(formValues)
-    .finally(() => {
+    .then((userInfo) => {
+      userInformation.setUserInfo(userInfo);
       popupRedact.close();
-      popupRedact.loadingProcess();
+    })
+    .finally(() => {
+      popupRedact.loadingProcess('Сохранить');
     });
 };
 
 const popupRedact = new PopupWithForm(
-  document.querySelector(popupSelectors.popupRedact),
+  document.querySelector(selectors.popupRedact),
   handleEditProfileSubmit
 );
 popupRedact.setEventListeners();
 
 
 // Слушатели открытия попапов
-document.querySelector(popupSelectors.openPopupAvatarBut)
+document.querySelector(selectors.openPopupAvatarBut)
   .addEventListener('click', () => {
     avatarFormValidator.removeValidationErrors();
     popupAvatar.open();
   });
 
-document.querySelector(popupSelectors.openPopupRedactBut)
+document.querySelector(selectors.openPopupRedactBut)
   .addEventListener('click', () => {
     document.forms.popupRedactForm.name.value = userInformation.getUserInfo().titleName;
     document.forms.popupRedactForm.about.value = userInformation.getUserInfo().subtitleJob;
@@ -161,7 +162,7 @@ document.querySelector(popupSelectors.openPopupRedactBut)
     popupRedact.open();
   });
 
-document.querySelector(popupSelectors.openPopupAddBut)
+document.querySelector(selectors.openPopupAddBut)
   .addEventListener('click', () => {
     addCardFormValidator.removeValidationErrors();
     popupAdd.open();

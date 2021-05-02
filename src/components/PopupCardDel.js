@@ -1,17 +1,21 @@
 import { Popup } from './Popup.js';
 
 export default class PopupCardDel extends Popup {
-  constructor(popupDel, api, cardItem, card) {
+  constructor(popupDel, api) {
     super(popupDel);
     this._api = api;
-    this._cardItem = cardItem;
     this._popup = popupDel;
+  }
+
+  open(cardItem, card) {
     this._card = card;
+    this._cardItem = cardItem;
+    this._popup.addEventListener('submit', this._submitForm);
+    super.open();
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._popup.addEventListener('submit', this._submitForm);
   }
 
   _submitForm = (evt) => {
@@ -19,13 +23,13 @@ export default class PopupCardDel extends Popup {
     this._api.deleteCard(this._cardItem._id)
       .then(() => {
         this._card.remove();
-      });
-    super.close()
-    this._removeEventListeners();
+        this.close()
+      })
+      .catch((err) => console.log(`АЛЯРМ!: ${err}`));
   };
 
-  _removeEventListeners() {
-    super._removeEventListeners()
-    this._popup.removeEventListener('submit', this._submitForm);
+  close() {
+    super.close()
+    this._popup.removeEventListener('submit', this._submitForm)
   }
 }

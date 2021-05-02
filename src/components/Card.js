@@ -1,7 +1,7 @@
 export default class Card {
-  constructor(data, api, { popupSelectors, handleCardClick, handleDelClick }) {
+  constructor(data, api, { selectors, handleCardClick, handleDelClick }) {
     this._api = api;
-    this._cardTemplate = popupSelectors.templateSelector;
+    this._cardTemplate = selectors.templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleDelClick = handleDelClick;
     this._name = data.name;
@@ -24,7 +24,7 @@ export default class Card {
     this._cardTitle.textContent = this._name;
     this._likeCounter.textContent = this._likes.length;
 
-    if (userData._id === this._owner._id) {
+    if (userData.userId === this._owner._id) {
       this._element.querySelector('.photos__icon-del').style.display = 'block';
     }
 
@@ -33,7 +33,7 @@ export default class Card {
       this._element.querySelector('.photos__like-column').style.display = 'block';
     }
 
-    if (this._likes.find((like) => like._id === userData._id)) {
+    if (this._likes.find((like) => like._id === userData.userId)) {
       this._element.querySelector('.photos__icon').classList.add('photos__icon_active');
     }
 

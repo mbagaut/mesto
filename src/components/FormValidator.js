@@ -8,82 +8,69 @@ export class FormValidator {
   enableValidation() {
     const fieldsetList = Array.from(this._currentForm.querySelectorAll(this._formSelectors.fieldsetSelector));
     fieldsetList.forEach((fieldset) => {
-      this._setEventListeners(fieldset);
+      this._fieldset = fieldset;
+      this._setEventListeners();
     });
   }
 
-  _setEventListeners(fieldset) {
-    const inputList = Array.from(fieldset.querySelectorAll(this._formSelectors.inputSelector));
-    const buttonElement = fieldset.querySelector(this._formSelectors.submitButtonSelector);
+  _setEventListeners() {
+    this._inputList = Array.from(this._fieldset.querySelectorAll(this._formSelectors.inputSelector));
 
-    this._toggleButtonState(inputList, buttonElement);
+    this._toggleButtonState();
 
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(fieldset, inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
   }
 
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasValidInput(inputList)) {
-      buttonElement.classList.remove(this._formSelectors.inactiveButtonClass);
-      buttonElement.removeAttribute('disabled');
+  _toggleButtonState() {
+    if (this._hasValidInput(this._inputList)) {
+      this._submitBtn.classList.remove(this._formSelectors.inactiveButtonClass);
+      this._submitBtn.removeAttribute('disabled');
 
     } else {
-      buttonElement.classList.add(this._formSelectors.inactiveButtonClass);
-      buttonElement.setAttribute('disabled', true);
+      this._submitBtn.classList.add(this._formSelectors.inactiveButtonClass);
+      this._submitBtn.setAttribute('disabled', true);
     }
   }
 
-  _hasValidInput(inputList) {
-    return !inputList.some((input) => {
+  _hasValidInput() {
+    return !this._inputList.some((input) => {
       return !input.validity.valid;
     });
   }
 
-  _checkInputValidity(fieldset, inputElement) {
+  _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(fieldset, inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(fieldset, inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
-  _showInputError(fieldset, inputElement, errorMessage) {
-    const errorElement = fieldset.querySelector(`.${inputElement.id.replace(/([0-9])/g, '')}-error`);
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._fieldset.querySelector(`.${inputElement.id.replace(/([0-9])/g, '')}-error`);
     inputElement.classList.add(this._formSelectors.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._formSelectors.errorClass);
   }
 
-  _hideInputError(fieldset, inputElement) {
-    const errorElement = fieldset.querySelector(`.${inputElement.id.replace(/([0-9])/g, '')}-error`);
+  _hideInputError(inputElement) {
+    const errorElement = this._fieldset.querySelector(`.${inputElement.id.replace(/([0-9])/g, '')}-error`);
     inputElement.classList.remove(this._formSelectors.inputErrorClass);
     errorElement.classList.remove(this._formSelectors.errorClass);
     errorElement.textContent = '';
   }
 
   removeValidationErrors() {
-    const popupErrorsText = this._currentForm.querySelectorAll(`.${this._formSelectors.errorClass}`);
-    const popupErrorsBorder = this._currentForm.querySelectorAll(`.${this._formSelectors.inputErrorClass}`);
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
 
-    if (popupErrorsText) {
-
-      // Затрёт сообщение об ошибке
-      popupErrorsText.forEach((popupErr) => {
-        popupErr.textContent = '';
-      })
-
-      // Удалит красное подчеркивание инпута
-      popupErrorsBorder.forEach((popupErr) => {
-        popupErr.classList.remove(this._formSelectors.inputErrorClass);
-      })
-
-      this._disableButtonState();
-    }
+    this._toggleButtonState();
   }
 
   _disableButtonState() {

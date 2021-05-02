@@ -5,7 +5,7 @@
 // const eniseisk = new URL('../images/eniseisk.jpg', import.meta.url);
 // const beketov2 = new URL('../images/beketov2.jpg', import.meta.url);
 
-const popupSelectors = {
+const selectors = {
   openPopupAvatarBut: '#popup-avatar-but',
   openPopupRedactBut: '#popup-redact-but',
   openPopupAddBut: '#popup-add-but',
@@ -32,4 +32,4 @@ const formSelectors = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__input-error',
 }
-export { popupSelectors, formSelectors }
+export { selectors, formSelectors }

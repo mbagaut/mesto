@@ -1,8 +1,8 @@
 export class UserInfo {
-  constructor(popupSelectors) {
-    this._titleName = document.querySelector(popupSelectors.titleName);
-    this._subtitleJob = document.querySelector(popupSelectors.subtitleJob);
-    this._userAvatar = document.querySelector(popupSelectors.avatarImg);
+  constructor(selectors) {
+    this._titleName = document.querySelector(selectors.titleName);
+    this._subtitleJob = document.querySelector(selectors.subtitleJob);
+    this._userAvatar = document.querySelector(selectors.avatarImg);
   }
 
   setUserInfo(userInfo) {
