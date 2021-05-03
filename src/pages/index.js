@@ -1,5 +1,3 @@
-// Огромное спасибо! Лучшее ревью за весь курс, нет слов.
-
 import './index.css';
 
 import { selectors, formSelectors } from '../utils/constants.js'
